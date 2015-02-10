@@ -1,0 +1,275 @@
+﻿namespace GoViewer
+{
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            this.menu = new System.Windows.Forms.MenuStrip();
+            this.menuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemSaveAs = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemQuit = new System.Windows.Forms.ToolStripMenuItem();
+            this.statPanel = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.controlPanel = new System.Windows.Forms.Panel();
+            this.btnMode = new System.Windows.Forms.Button();
+            this.btnEnd = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.boardPanel = new System.Windows.Forms.Panel();
+            this.timerView = new System.Windows.Forms.Timer(this.components);
+            this.btnFile = new System.Windows.Forms.Button();
+            this.menu.SuspendLayout();
+            this.statPanel.SuspendLayout();
+            this.controlPanel.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menu
+            // 
+            this.menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuFile});
+            this.menu.Location = new System.Drawing.Point(0, 0);
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(1147, 25);
+            this.menu.TabIndex = 0;
+            this.menu.Text = "menuStrip1";
+            // 
+            // menuFile
+            // 
+            this.menuFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.itemOpen,
+            this.itemSave,
+            this.itemSaveAs,
+            this.itemQuit});
+            this.menuFile.Name = "menuFile";
+            this.menuFile.Size = new System.Drawing.Size(44, 21);
+            this.menuFile.Text = "文件";
+            // 
+            // itemOpen
+            // 
+            this.itemOpen.Name = "itemOpen";
+            this.itemOpen.Size = new System.Drawing.Size(152, 22);
+            this.itemOpen.Text = "打开";
+            this.itemOpen.Click += new System.EventHandler(this.btnFile_Click);
+            // 
+            // itemSave
+            // 
+            this.itemSave.Name = "itemSave";
+            this.itemSave.Size = new System.Drawing.Size(112, 22);
+            this.itemSave.Text = "保存";
+            // 
+            // itemSaveAs
+            // 
+            this.itemSaveAs.Name = "itemSaveAs";
+            this.itemSaveAs.Size = new System.Drawing.Size(112, 22);
+            this.itemSaveAs.Text = "另存为";
+            // 
+            // itemQuit
+            // 
+            this.itemQuit.Name = "itemQuit";
+            this.itemQuit.Size = new System.Drawing.Size(112, 22);
+            this.itemQuit.Text = "退出";
+            this.itemQuit.Click += new System.EventHandler(this.itemQuit_Click);
+            // 
+            // statPanel
+            // 
+            this.statPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.statPanel.Controls.Add(this.label2);
+            this.statPanel.Controls.Add(this.label1);
+            this.statPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.statPanel.Location = new System.Drawing.Point(1018, 25);
+            this.statPanel.Name = "statPanel";
+            this.statPanel.Size = new System.Drawing.Size(129, 867);
+            this.statPanel.TabIndex = 1;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(40, 148);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 26);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "白方";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(40, 42);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 26);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "黑方";
+            // 
+            // controlPanel
+            // 
+            this.controlPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.controlPanel.Controls.Add(this.btnFile);
+            this.controlPanel.Controls.Add(this.btnMode);
+            this.controlPanel.Controls.Add(this.btnEnd);
+            this.controlPanel.Controls.Add(this.btnNext);
+            this.controlPanel.Controls.Add(this.btnPrevious);
+            this.controlPanel.Controls.Add(this.btnStart);
+            this.controlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.controlPanel.Location = new System.Drawing.Point(0, 807);
+            this.controlPanel.Name = "controlPanel";
+            this.controlPanel.Size = new System.Drawing.Size(1018, 85);
+            this.controlPanel.TabIndex = 2;
+            // 
+            // btnMode
+            // 
+            this.btnMode.Location = new System.Drawing.Point(626, 33);
+            this.btnMode.Name = "btnMode";
+            this.btnMode.Size = new System.Drawing.Size(75, 23);
+            this.btnMode.TabIndex = 4;
+            this.btnMode.Text = "自动打谱";
+            this.btnMode.UseVisualStyleBackColor = true;
+            this.btnMode.Click += new System.EventHandler(this.btnMode_Click);
+            // 
+            // btnEnd
+            // 
+            this.btnEnd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnEnd.Location = new System.Drawing.Point(532, 33);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnEnd.TabIndex = 3;
+            this.btnEnd.Text = "结束";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            // 
+            // btnNext
+            // 
+            this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnNext.Location = new System.Drawing.Point(439, 33);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.TabIndex = 2;
+            this.btnNext.Text = "下一步";
+            this.btnNext.UseVisualStyleBackColor = true;
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnPrevious.Location = new System.Drawing.Point(345, 33);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevious.TabIndex = 1;
+            this.btnPrevious.Text = "上一步";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnStart.Location = new System.Drawing.Point(253, 33);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 0;
+            this.btnStart.Text = "开始";
+            this.btnStart.UseVisualStyleBackColor = true;
+            // 
+            // boardPanel
+            // 
+            this.boardPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boardPanel.BackColor = System.Drawing.Color.Peru;
+            this.boardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.boardPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.boardPanel.Location = new System.Drawing.Point(0, 25);
+            this.boardPanel.Name = "boardPanel";
+            this.boardPanel.Size = new System.Drawing.Size(1018, 785);
+            this.boardPanel.TabIndex = 3;
+            this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
+            this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
+            this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);
+            this.boardPanel.Resize += new System.EventHandler(this.boardPanel_Resize);
+            // 
+            // timerView
+            // 
+            this.timerView.Interval = 1000;
+            this.timerView.Tick += new System.EventHandler(this.timerView_Tick);
+            // 
+            // btnFile
+            // 
+            this.btnFile.Location = new System.Drawing.Point(722, 33);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(75, 23);
+            this.btnFile.TabIndex = 5;
+            this.btnFile.Text = "打开文件";
+            this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1147, 892);
+            this.Controls.Add(this.boardPanel);
+            this.Controls.Add(this.controlPanel);
+            this.Controls.Add(this.statPanel);
+            this.Controls.Add(this.menu);
+            this.MinimumSize = new System.Drawing.Size(500, 400);
+            this.Name = "MainForm";
+            this.Text = "棋谱查看器";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menu.ResumeLayout(false);
+            this.menu.PerformLayout();
+            this.statPanel.ResumeLayout(false);
+            this.statPanel.PerformLayout();
+            this.controlPanel.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menu;
+        private System.Windows.Forms.ToolStripMenuItem menuFile;
+        private System.Windows.Forms.ToolStripMenuItem itemOpen;
+        private System.Windows.Forms.ToolStripMenuItem itemSave;
+        private System.Windows.Forms.ToolStripMenuItem itemSaveAs;
+        private System.Windows.Forms.ToolStripMenuItem itemQuit;
+        private System.Windows.Forms.Panel statPanel;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel controlPanel;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnEnd;
+        private System.Windows.Forms.Button btnNext;
+        private System.Windows.Forms.Button btnPrevious;
+        private System.Windows.Forms.Panel boardPanel;
+        private System.Windows.Forms.Button btnMode;
+        private System.Windows.Forms.Timer timerView;
+        private System.Windows.Forms.Button btnFile;
+    }
+}
+
