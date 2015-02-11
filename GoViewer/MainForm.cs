@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace GoViewer
 {
+    /// <summary>
+    /// 处理鼠标，显示等等
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
@@ -267,25 +270,28 @@ namespace GoViewer
         private void btnFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.ShowDialog();
-            FileStream aFile = new FileStream(dialog.FileName, FileMode.Open);
-            StreamReader sr = new StreamReader(aFile);
-            board.Moves = new List<Move>();
-
-            
-            string strLine = sr.ReadLine();
-            while (strLine != null)
+            dialog.Filter = "弈城棋谱|*.gib";
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                string[] Strs = strLine.Split(' ');
-                if (Strs[0] != "STO")
+                FileStream aFile = new FileStream(dialog.FileName, FileMode.Open);
+                StreamReader sr = new StreamReader(aFile);
+                board.Moves = new List<Move>();
+
+
+                string strLine = sr.ReadLine();
+                while (strLine != null)
                 {
+                    string[] Strs = strLine.Split(' ');
+                    if (Strs[0] != "STO")
+                    {
+                        strLine = sr.ReadLine();
+                        continue;
+                    }
+                    board.Moves.Add(new Move(int.Parse(Strs[5]), int.Parse(Strs[4]), Strs[3] == "1"));
                     strLine = sr.ReadLine();
-                    continue;
                 }
-                board.Moves.Add(new Move(int.Parse(Strs[5]),int.Parse(Strs[4]),Strs[3] == "1"));
-                strLine = sr.ReadLine();
+                sr.Close();
             }
-            sr.Close();
         }
     }
 }
