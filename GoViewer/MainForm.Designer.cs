@@ -39,6 +39,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.controlPanel = new System.Windows.Forms.Panel();
+            this.btnFile = new System.Windows.Forms.Button();
             this.btnMode = new System.Windows.Forms.Button();
             this.btnEnd = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@
             this.btnStart = new System.Windows.Forms.Button();
             this.boardPanel = new System.Windows.Forms.Panel();
             this.timerView = new System.Windows.Forms.Timer(this.components);
-            this.btnFile = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.statPanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -76,7 +76,7 @@
             // itemOpen
             // 
             this.itemOpen.Name = "itemOpen";
-            this.itemOpen.Size = new System.Drawing.Size(152, 22);
+            this.itemOpen.Size = new System.Drawing.Size(112, 22);
             this.itemOpen.Text = "打开";
             this.itemOpen.Click += new System.EventHandler(this.btnFile_Click);
             // 
@@ -145,6 +145,16 @@
             this.controlPanel.Size = new System.Drawing.Size(1018, 85);
             this.controlPanel.TabIndex = 2;
             // 
+            // btnFile
+            // 
+            this.btnFile.Location = new System.Drawing.Point(722, 33);
+            this.btnFile.Name = "btnFile";
+            this.btnFile.Size = new System.Drawing.Size(75, 23);
+            this.btnFile.TabIndex = 5;
+            this.btnFile.Text = "打开文件";
+            this.btnFile.UseVisualStyleBackColor = true;
+            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
+            // 
             // btnMode
             // 
             this.btnMode.Location = new System.Drawing.Point(626, 33);
@@ -200,7 +210,7 @@
             this.boardPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.boardPanel.BackColor = System.Drawing.Color.Peru;
+            this.boardPanel.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.boardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.boardPanel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.boardPanel.Location = new System.Drawing.Point(0, 25);
@@ -216,16 +226,6 @@
             // 
             this.timerView.Interval = 1000;
             this.timerView.Tick += new System.EventHandler(this.timerView_Tick);
-            // 
-            // btnFile
-            // 
-            this.btnFile.Location = new System.Drawing.Point(722, 33);
-            this.btnFile.Name = "btnFile";
-            this.btnFile.Size = new System.Drawing.Size(75, 23);
-            this.btnFile.TabIndex = 5;
-            this.btnFile.Text = "打开文件";
-            this.btnFile.UseVisualStyleBackColor = true;
-            this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // MainForm
             // 

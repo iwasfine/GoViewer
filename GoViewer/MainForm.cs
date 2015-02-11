@@ -100,7 +100,7 @@ namespace GoViewer
         /// <param name="e"></param>
         private void boardPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            setBoard(e.X, e.Y, turn); 
+            setBoard(e.X, e.Y, turn);
             if (mouseIn)                    //鼠标是否点在棋盘范围
             {
                 //更新需更新的部分棋盘
@@ -193,10 +193,12 @@ namespace GoViewer
             Graphics g = Graphics.FromImage(img);
 
             //使绘图质量最高，即消除锯齿
-            g.SmoothingMode = SmoothingMode.AntiAlias;  
+            g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.CompositingQuality = CompositingQuality.HighQuality;
 
+            g.FillRectangle(Brushes.Gray, width / 2 - 9 * size - size / 4+3, height / 2 - 9 * size - size / 4+3, size * 19 + size / 2, size * 19 + size / 2);
+            g.FillRectangle(Brushes.Peru, width / 2 - 9 * size - size / 4, height / 2 - 9 * size - size / 4, size * 19 + size / 2, size * 19 + size / 2);
             Pen pen = new Pen(Brushes.Black, 1);
             for (int i = 0; i < 19; i++)
             {
@@ -232,7 +234,7 @@ namespace GoViewer
             timerView.Enabled = true;
             drawImage();
             boardPanel.Refresh();
-            
+
         }
 
         /// <summary>
