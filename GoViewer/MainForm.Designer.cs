@@ -45,7 +45,6 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.boardPanel = new System.Windows.Forms.Panel();
             this.timerView = new System.Windows.Forms.Timer(this.components);
             this.menu.SuspendLayout();
             this.statPanel.SuspendLayout();
@@ -147,6 +146,7 @@
             // 
             // btnFile
             // 
+            this.btnFile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnFile.Location = new System.Drawing.Point(722, 33);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(75, 23);
@@ -157,6 +157,7 @@
             // 
             // btnMode
             // 
+            this.btnMode.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnMode.Location = new System.Drawing.Point(626, 33);
             this.btnMode.Name = "btnMode";
             this.btnMode.Size = new System.Drawing.Size(75, 23);
@@ -205,23 +206,6 @@
             this.btnStart.Text = "开始";
             this.btnStart.UseVisualStyleBackColor = true;
             // 
-            // boardPanel
-            // 
-            this.boardPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.boardPanel.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.boardPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.boardPanel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.boardPanel.Location = new System.Drawing.Point(0, 25);
-            this.boardPanel.Name = "boardPanel";
-            this.boardPanel.Size = new System.Drawing.Size(1018, 785);
-            this.boardPanel.TabIndex = 3;
-            this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
-            this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
-            this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);
-            this.boardPanel.Resize += new System.EventHandler(this.boardPanel_Resize);
-            // 
             // timerView
             // 
             this.timerView.Interval = 1000;
@@ -232,7 +216,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 892);
-            this.Controls.Add(this.boardPanel);
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.statPanel);
             this.Controls.Add(this.menu);
@@ -266,7 +249,6 @@
         private System.Windows.Forms.Button btnEnd;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrevious;
-        private System.Windows.Forms.Panel boardPanel;
         private System.Windows.Forms.Button btnMode;
         private System.Windows.Forms.Timer timerView;
         private System.Windows.Forms.Button btnFile;

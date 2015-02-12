@@ -17,6 +17,7 @@ namespace GoViewer
     /// </summary>
     public partial class MainForm : Form
     {
+        private BoardPanel boardPanel;
         /// <summary>
         /// 初始化新棋盘
         /// </summary>
@@ -24,6 +25,13 @@ namespace GoViewer
         {
             InitializeComponent();
             board = new Board();
+            this.boardPanel = new BoardPanel();
+            this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
+            this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
+            this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);
+            this.boardPanel.Resize += new System.EventHandler(this.boardPanel_Resize);
+            this.Controls.Add(this.boardPanel);
+
         }
 
         /// <summary>
