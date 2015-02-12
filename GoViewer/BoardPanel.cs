@@ -21,6 +21,8 @@ namespace GoViewer
             this.Name = "boardPanel";
             //this.Size = new System.Drawing.Size(1018, 785);
             this.TabIndex = 3;
+
+            //设置双缓冲，去掉闪烁
             this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
             this.UpdateStyles();
         }

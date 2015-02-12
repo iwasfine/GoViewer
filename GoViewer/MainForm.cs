@@ -26,7 +26,7 @@ namespace GoViewer
             InitializeComponent();
             board = new Board();
             this.boardPanel = new BoardPanel();
-            this.boardPanel.Size = new System.Drawing.Size(this.Width - 150, this.Height - 150);
+            this.boardPanel.Size = new System.Drawing.Size(this.Width - 145, this.Height - 150);
             this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
             this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
             this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);
@@ -206,7 +206,7 @@ namespace GoViewer
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.CompositingQuality = CompositingQuality.HighQuality;
 
-            g.FillRectangle(Brushes.Gray, width / 2 - 9 * size - size / 4+3, height / 2 - 9 * size - size / 4+3, size * 19 + size / 2, size * 19 + size / 2);
+            g.FillRectangle(Brushes.Gray, width / 2 - 9 * size - size / 4 + 3, height / 2 - 9 * size - size / 4 + 3, size * 19 + size / 2, size * 19 + size / 2);
             g.FillRectangle(Brushes.Peru, width / 2 - 9 * size - size / 4, height / 2 - 9 * size - size / 4, size * 19 + size / 2, size * 19 + size / 2);
             Pen pen = new Pen(Brushes.Black, 1);
             for (int i = 0; i < 19; i++)
@@ -303,6 +303,19 @@ namespace GoViewer
                 }
                 sr.Close();
             }
+
+            //显示终局棋盘
+            moves = new List<Move>(board.Moves);
+            board.clear();
+            drawImage();
+            boardPanel.Refresh();
+            foreach (var item in moves)
+            {
+                board.setStone(item.row, item.col, item.black == BLACK);
+            }
+            drawImage();
+            boardPanel.Refresh();
+            board.Moves = new List<Move>(moves);
         }
     }
 }
