@@ -26,6 +26,7 @@ namespace GoViewer
             InitializeComponent();
             board = new Board();
             this.boardPanel = new BoardPanel();
+            this.boardPanel.Size = new System.Drawing.Size(this.Width - 150, this.Height - 150);
             this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
             this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
             this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);

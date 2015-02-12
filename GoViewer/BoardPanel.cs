@@ -19,8 +19,10 @@ namespace GoViewer
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Location = new System.Drawing.Point(0, 25);
             this.Name = "boardPanel";
-            this.Size = new System.Drawing.Size(1018, 785);
+            //this.Size = new System.Drawing.Size(1018, 785);
             this.TabIndex = 3;
+            this.SetStyle(ControlStyles.DoubleBuffer | ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint, true);
+            this.UpdateStyles();
         }
     }
 }
