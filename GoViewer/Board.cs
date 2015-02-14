@@ -31,7 +31,6 @@ namespace GoViewer
 
         public Board()
         {
-            Count = 0;
             clear();
         }
 
@@ -40,6 +39,7 @@ namespace GoViewer
         /// </summary>
         public void clear()
         {
+            Count = 0;
             Moves = new List<Move>();
             Dead = new List<HashSet<Move>>();
             grid = new bool?[19, 19];

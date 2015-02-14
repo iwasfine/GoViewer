@@ -265,14 +265,7 @@ namespace GoViewer
             board.setStone(moves[timerCount].row, moves[timerCount].col, moves[timerCount].black == BLACK);
             timerCount++;
             drawImage();
-            foreach (Point p in board.needToInvalidate)
-            {
-                int x = width / 2 - 9 * size + p.Y * size;
-                int y = height / 2 - 9 * size + p.X * size;
-                Rectangle rec = new Rectangle(x, y, size, size);
-                boardPanel.Invalidate(rec);
-
-            }
+            boardPanel.Refresh();
         }
 
         /// <summary>
