@@ -63,6 +63,8 @@ namespace GoViewer
         {
             Graphics g = e.Graphics;
             g.DrawImage(img, 0, 0);
+            if (board.Count == 0) return;
+            drawSquare(g, board.Moves[board.Count - 1].row, board.Moves[board.Count - 1].col, board.Moves[board.Count - 1].black);
         }
 
         /// <summary>
@@ -114,14 +116,15 @@ namespace GoViewer
             {
                 //更新需更新的部分棋盘
                 drawImage();
-                foreach (Point p in board.needToInvalidate)
-                {
-                    int x = width / 2 - 9 * size + p.Y * size;
-                    int y = height / 2 - 9 * size + p.X * size;
-                    Rectangle rec = new Rectangle(x, y, size, size);
-                    boardPanel.Invalidate(rec);
+                Refresh();
+                //foreach (Point p in board.needToInvalidate)
+                //{
+                //    int x = width / 2 - 9 * size + p.Y * size;
+                //    int y = height / 2 - 9 * size + p.X * size;
+                //    Rectangle rec = new Rectangle(x, y, size, size);
+                //    boardPanel.Invalidate(rec);
 
-                }
+                //}
                 //黑白互换
                 if (board.needToInvalidate.Count != 0)
                     if (turn == true) turn = false;
@@ -160,12 +163,12 @@ namespace GoViewer
         private void drawSquare(Graphics g, int i, int j, bool? isBlack)
         {
             if (isBlack == null) return;
-            int x = width / 2 - 9 * size + j * size + size / 2 - 3;
-            int y = height / 2 - 9 * size + i * size + size / 2 - 3;
+            int x = width / 2 - 9 * size + j * size + size / 2 - 5;
+            int y = height / 2 - 9 * size + i * size + size / 2 - 5;
             if (isBlack == true)
-                g.FillRectangle(Brushes.Black, x, y, 6, 6);
+                g.FillRectangle(Brushes.White, x, y, 10, 10);
             else
-                g.FillRectangle(Brushes.White, x, y, 6, 6);
+                g.FillRectangle(Brushes.Black, x, y, 10, 10);
 
         }
 
@@ -316,6 +319,42 @@ namespace GoViewer
             drawImage();
             boardPanel.Refresh();
             board.Moves = new List<Move>(moves);
+        }
+
+        /// <summary>
+        /// 上一步按钮操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPrevious_Click(object sender, EventArgs e)
+        {
+            board.Previous();
+            drawImage();
+            boardPanel.Refresh();
+        }
+
+        /// <summary>
+        /// 下一步按钮操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            board.Next();
+            drawImage();
+            boardPanel.Refresh();
+        }
+
+        /// <summary>
+        /// 开始按钮操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            board.GotoStart();
+            drawImage();
+            boardPanel.Refresh();
         }
     }
 }

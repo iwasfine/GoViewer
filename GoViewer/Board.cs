@@ -18,7 +18,8 @@ namespace GoViewer
         /// 下过的棋的招法集合
         /// </summary>
         public List<Move> Moves;
-        private int Count;
+        public List<HashSet<Move>> Dead;
+        public int Count;
         /// <summary>
         /// 连通的棋的集合
         /// </summary>
@@ -40,6 +41,7 @@ namespace GoViewer
         public void clear()
         {
             Moves = new List<Move>();
+            Dead = new List<HashSet<Move>>();
             grid = new bool?[19, 19];
             Unions = new List<HashSet<int>>();
             HashSet<int> tmp = new HashSet<int>();
@@ -102,16 +104,18 @@ namespace GoViewer
             if (i < 18) connect(i, j, i + 1, j);
             if (j > 0) connect(i, j, i, j - 1);
             if (j < 18) connect(i, j, i, j + 1);
-            Count++;
             Moves.Add(new Move(i, j, isBlack == true));
 
             needToInvalidate.Add(new Point(i, j));
 
             //如有，提死子
-            if (i > 0 && grid[i - 1, j] != null && grid[i - 1, j] != isBlack && qi(i - 1, j) == 0) remove(i - 1, j);
-            if (i < 18 && grid[i + 1, j] != null && grid[i + 1, j] != isBlack && qi(i + 1, j) == 0) remove(i + 1, j);
-            if (j > 0 && grid[i, j - 1] != null && grid[i, j - 1] != isBlack && qi(i, j - 1) == 0) remove(i, j - 1);
-            if (j < 18 && grid[i, j + 1] != null && grid[i, j + 1] != isBlack && qi(i, j + 1) == 0) remove(i, j + 1);
+            HashSet<Move> dead = new HashSet<Move>();
+            if (i > 0 && grid[i - 1, j] != null && grid[i - 1, j] != isBlack && qi(i - 1, j) == 0) remove(i - 1, j, dead, isBlack);
+            if (i < 18 && grid[i + 1, j] != null && grid[i + 1, j] != isBlack && qi(i + 1, j) == 0) remove(i + 1, j, dead, isBlack);
+            if (j > 0 && grid[i, j - 1] != null && grid[i, j - 1] != isBlack && qi(i, j - 1) == 0) remove(i, j - 1, dead, isBlack);
+            if (j < 18 && grid[i, j + 1] != null && grid[i, j + 1] != isBlack && qi(i, j + 1) == 0) remove(i, j + 1, dead, isBlack);
+            Dead.Add(dead);
+            Count++;
 
         }
 
@@ -120,7 +124,7 @@ namespace GoViewer
         /// </summary>
         /// <param name="i">矩阵纵坐标</param>
         /// <param name="j">矩阵横坐标</param>
-        private void remove(int i, int j)
+        private void remove(int i, int j, HashSet<Move> dead, bool? isBlack)
         {
             HashSet<int> set = null;
             foreach (HashSet<int> s in Unions)
@@ -137,6 +141,7 @@ namespace GoViewer
                 int x = n % 19;
                 int y = n / 19;
                 grid[y, x] = null;
+                dead.Add(new Move(y, x, isBlack != true));
                 needToInvalidate.Add(new Point(y, x));
             }
             Unions.Remove(set);
@@ -195,5 +200,44 @@ namespace GoViewer
             Unions[x].UnionWith(Unions[y]);
             Unions.RemoveAt(y);
         }
+
+        /// <summary>
+        /// 设置棋盘为上一步状态
+        /// </summary>
+        public void Previous()
+        {
+            if (Count <= 0) return;
+            Count--;
+            grid[Moves[Count].row, Moves[Count].col] = null;
+            foreach (var item in Dead[Count])
+            {
+                grid[item.row, item.col] = item.black;
+            }
+        }
+
+        /// <summary>
+        /// 设置棋盘为下一步状态
+        /// </summary>
+        public void Next()
+        {
+            if (Count > Moves.Count - 1) return;
+            grid[Moves[Count].row, Moves[Count].col] = Moves[Count].black;
+            foreach (var item in Dead[Count])
+            {
+                grid[item.row, item.col] = null;
+            }
+            Count++;
+        }
+
+        /// <summary>
+        /// 清空棋盘，回到开始
+        /// </summary>
+        public void GotoStart()
+        {
+            Count = 0;
+            grid = new bool?[19, 19];
+            
+        }
     }
+
 }

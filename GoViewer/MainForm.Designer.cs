@@ -57,7 +57,7 @@
             this.menuFile});
             this.menu.Location = new System.Drawing.Point(0, 0);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(979, 25);
+            this.menu.Size = new System.Drawing.Size(987, 25);
             this.menu.TabIndex = 0;
             this.menu.Text = "menuStrip1";
             // 
@@ -75,8 +75,8 @@
             // itemOpen
             // 
             this.itemOpen.Name = "itemOpen";
-            this.itemOpen.Size = new System.Drawing.Size(112, 22);
-            this.itemOpen.Text = "打开";
+            this.itemOpen.Size = new System.Drawing.Size(152, 22);
+            this.itemOpen.Text = "打开棋谱";
             this.itemOpen.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // itemSave
@@ -104,9 +104,9 @@
             this.statPanel.Controls.Add(this.label2);
             this.statPanel.Controls.Add(this.label1);
             this.statPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.statPanel.Location = new System.Drawing.Point(850, 25);
+            this.statPanel.Location = new System.Drawing.Point(858, 25);
             this.statPanel.Name = "statPanel";
-            this.statPanel.Size = new System.Drawing.Size(129, 589);
+            this.statPanel.Size = new System.Drawing.Size(129, 716);
             this.statPanel.TabIndex = 1;
             // 
             // label2
@@ -139,26 +139,26 @@
             this.controlPanel.Controls.Add(this.btnPrevious);
             this.controlPanel.Controls.Add(this.btnStart);
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.controlPanel.Location = new System.Drawing.Point(0, 529);
+            this.controlPanel.Location = new System.Drawing.Point(0, 656);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(850, 85);
+            this.controlPanel.Size = new System.Drawing.Size(858, 85);
             this.controlPanel.TabIndex = 2;
             // 
             // btnFile
             // 
             this.btnFile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnFile.Location = new System.Drawing.Point(638, 33);
+            this.btnFile.Location = new System.Drawing.Point(642, 33);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(75, 23);
             this.btnFile.TabIndex = 5;
-            this.btnFile.Text = "打开文件";
+            this.btnFile.Text = "打开棋谱";
             this.btnFile.UseVisualStyleBackColor = true;
             this.btnFile.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // btnMode
             // 
             this.btnMode.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnMode.Location = new System.Drawing.Point(542, 33);
+            this.btnMode.Location = new System.Drawing.Point(546, 33);
             this.btnMode.Name = "btnMode";
             this.btnMode.Size = new System.Drawing.Size(75, 23);
             this.btnMode.TabIndex = 4;
@@ -169,7 +169,7 @@
             // btnEnd
             // 
             this.btnEnd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnEnd.Location = new System.Drawing.Point(448, 33);
+            this.btnEnd.Location = new System.Drawing.Point(452, 33);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 23);
             this.btnEnd.TabIndex = 3;
@@ -179,32 +179,35 @@
             // btnNext
             // 
             this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnNext.Location = new System.Drawing.Point(355, 33);
+            this.btnNext.Location = new System.Drawing.Point(359, 33);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 2;
             this.btnNext.Text = "下一步";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
             this.btnPrevious.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnPrevious.Location = new System.Drawing.Point(261, 33);
+            this.btnPrevious.Location = new System.Drawing.Point(265, 33);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(75, 23);
             this.btnPrevious.TabIndex = 1;
             this.btnPrevious.Text = "上一步";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnStart.Location = new System.Drawing.Point(169, 33);
+            this.btnStart.Location = new System.Drawing.Point(173, 33);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
             this.btnStart.Text = "开始";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // timerView
             // 
@@ -215,7 +218,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(979, 614);
+            this.ClientSize = new System.Drawing.Size(987, 741);
             this.Controls.Add(this.controlPanel);
             this.Controls.Add(this.statPanel);
             this.Controls.Add(this.menu);
