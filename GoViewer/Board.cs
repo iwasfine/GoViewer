@@ -31,10 +31,16 @@ namespace GoViewer
         /// </summary>
         private List<HashSet<int>> Unions;
         /// <summary>
-        /// 需更新的点的集合
+        /// 落子是否有效
         /// </summary>
-        public HashSet<Point> needToInvalidate { set; get; }
-
+        public bool IsValid { set; get; }
+        /// <summary>
+        /// 是否打劫
+        /// </summary>
+        public bool isKo { get; set; }
+        /// <summary>
+        /// 新棋盘
+        /// </summary>
         public Board()
         {
             clear();
@@ -75,7 +81,8 @@ namespace GoViewer
         /// <param name="isBlack">黑白空</param>
         public void setStone(int i, int j, bool? isBlack)
         {
-            needToInvalidate = new HashSet<Point>();
+            IsValid = false;
+            isKo = false;
 
             if (isBlack == null)
             {
@@ -112,7 +119,7 @@ namespace GoViewer
             if (j < 18) connect(i, j, i, j + 1);
             Moves.Add(new Move(i, j, isBlack == true));
 
-            needToInvalidate.Add(new Point(i, j));
+            IsValid = true;
 
             //如有，提死子
             HashSet<Move> dead = new HashSet<Move>();
@@ -123,6 +130,21 @@ namespace GoViewer
             Dead.Add(dead);
             Count++;
 
+            //判断是否打劫
+            if (Dead.Count < 3) return;
+            if (Dead[Dead.Count - 1].Count != 1) return;
+            if (Dead[Dead.Count - 2].Count != 1) return;
+
+            foreach (var item in Unions)
+            {
+                if (item.Contains(i * 19 + j) && item.Count != 1) return;
+            }
+            Move m = Dead[Dead.Count - 1].First();
+            if (!m.Equals(Moves[Moves.Count - 2])) return;
+            Moves.RemoveAt(Moves.Count - 1);
+            Count--;
+            isKo = true;
+            IsValid = false;
         }
 
         /// <summary>
@@ -130,6 +152,8 @@ namespace GoViewer
         /// </summary>
         /// <param name="i">矩阵纵坐标</param>
         /// <param name="j">矩阵横坐标</param>
+        /// <param name="dead">当前死子集合</param>
+        /// <param name="isBlack">黑白</param>
         private void remove(int i, int j, HashSet<Move> dead, bool? isBlack)
         {
             HashSet<int> set = null;
@@ -148,7 +172,6 @@ namespace GoViewer
                 int y = n / 19;
                 grid[y, x] = null;
                 dead.Add(new Move(y, x, isBlack != true));
-                needToInvalidate.Add(new Point(y, x));
             }
             Unions.Remove(set);
         }
@@ -242,7 +265,7 @@ namespace GoViewer
         {
             Count = 0;
             grid = new bool?[19, 19];
-            
+
         }
     }
 

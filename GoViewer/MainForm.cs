@@ -114,7 +114,15 @@ namespace GoViewer
             setBoard(e.X, e.Y, turn);
             if (mouseIn)                    //鼠标是否点在棋盘范围
             {
-                //更新需更新的部分棋盘
+                //处理打劫
+                if (board.isKo)
+                {
+                    DisplayEnd();
+                    mouseIn = false;
+                    board.isKo = false;
+                    return;
+                }
+                //更新棋盘
                 drawImage();
                 Refresh();
                 //foreach (Point p in board.needToInvalidate)
@@ -126,7 +134,7 @@ namespace GoViewer
 
                 //}
                 //黑白互换
-                if (board.needToInvalidate.Count != 0)
+                if (board.IsValid)
                     if (turn == true) turn = false;
                     else if (turn == false) turn = true;
             }
@@ -308,7 +316,7 @@ namespace GoViewer
                     strLine = sr.ReadLine();
                     continue;
                 }
-                board.Moves.Add(new Move(strLine[7]-'B', strLine[8]-'B', strLine[4]=='B'));
+                board.Moves.Add(new Move(strLine[7] - 'B', strLine[8] - 'B', strLine[4] == 'B'));
                 strLine = sr.ReadLine();
             }
             sr.Close();
@@ -347,8 +355,8 @@ namespace GoViewer
         {
             moves = new List<Move>(board.Moves);
             board.clear();
-            drawImage();
-            boardPanel.Refresh();
+            //drawImage();
+            //boardPanel.Refresh();
             foreach (var item in moves)
             {
                 board.setStone(item.row, item.col, item.black == BLACK);
