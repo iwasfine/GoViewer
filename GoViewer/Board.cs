@@ -18,7 +18,13 @@ namespace GoViewer
         /// 下过的棋的招法集合
         /// </summary>
         public List<Move> Moves;
+        /// <summary>
+        /// 提子集合
+        /// </summary>
         public List<HashSet<Move>> Dead;
+        /// <summary>
+        /// 当前步数
+        /// </summary>
         public int Count;
         /// <summary>
         /// 连通的棋的集合

@@ -83,11 +83,11 @@ namespace GoViewer
             //设置颜色渐变画棋子
             Brush brush;
             if (isBlack == BLACK)
-                brush = new LinearGradientBrush(new Rectangle(x, y, size - 2, size - 2), Color.Gray, Color.Black, 60f);
+                brush = new LinearGradientBrush(new Rectangle(x, y, size, size), Color.Gray, Color.Black, 60f);
             else
-                brush = new LinearGradientBrush(new Rectangle(x, y, size - 2, size - 2), Color.White, Color.Gray, 60f);
+                brush = new LinearGradientBrush(new Rectangle(x, y, size, size), Color.White, Color.Gray, 60f);
 
-            g.FillEllipse(brush, x + 1, y + 1, size - 2, size - 2);
+            g.FillEllipse(brush, x, y, size, size);
         }
 
         /// <summary>
@@ -277,30 +277,74 @@ namespace GoViewer
         private void btnFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "弈城棋谱|*.gib";
+            dialog.Filter = "棋谱文件|*.gib;*.NGF|弈城棋谱|*.gib|新浪棋谱|*.NGF";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                FileStream aFile = new FileStream(dialog.FileName, FileMode.Open);
-                StreamReader sr = new StreamReader(aFile);
-                board.Moves = new List<Move>();
-
-
-                string strLine = sr.ReadLine();
-                while (strLine != null)
-                {
-                    string[] Strs = strLine.Split(' ');
-                    if (Strs[0] != "STO")
-                    {
-                        strLine = sr.ReadLine();
-                        continue;
-                    }
-                    board.Moves.Add(new Move(int.Parse(Strs[5]), int.Parse(Strs[4]), Strs[3] == "1"));
-                    strLine = sr.ReadLine();
-                }
-                sr.Close();
+                if (dialog.FileName.ToLower().EndsWith(".gib"))
+                    ParseEweiqiFile(dialog);
+                else if (dialog.FileName.ToLower().EndsWith(".ngf"))
+                    ParseSinaFile(dialog);
             }
 
-            //显示终局棋盘
+            DisplayEnd();
+        }
+
+        /// <summary>
+        /// 解析新浪棋谱
+        /// </summary>
+        /// <param name="dialog"></param>
+        private void ParseSinaFile(OpenFileDialog dialog)
+        {
+            FileStream aFile = new FileStream(dialog.FileName, FileMode.Open);
+            StreamReader sr = new StreamReader(aFile);
+            board.Moves = new List<Move>();
+
+
+            string strLine = sr.ReadLine();
+            while (strLine != null)
+            {
+                if (!strLine.StartsWith("PM"))
+                {
+                    strLine = sr.ReadLine();
+                    continue;
+                }
+                board.Moves.Add(new Move(strLine[7]-'B', strLine[8]-'B', strLine[4]=='B'));
+                strLine = sr.ReadLine();
+            }
+            sr.Close();
+        }
+
+        /// <summary>
+        /// 解析弈城棋谱文件
+        /// </summary>
+        /// <param name="dialog"></param>
+        private void ParseEweiqiFile(OpenFileDialog dialog)
+        {
+            FileStream aFile = new FileStream(dialog.FileName, FileMode.Open);
+            StreamReader sr = new StreamReader(aFile);
+            board.Moves = new List<Move>();
+
+
+            string strLine = sr.ReadLine();
+            while (strLine != null)
+            {
+                string[] Strs = strLine.Split(' ');
+                if (Strs[0] != "STO")
+                {
+                    strLine = sr.ReadLine();
+                    continue;
+                }
+                board.Moves.Add(new Move(int.Parse(Strs[5]), int.Parse(Strs[4]), Strs[3] == "1"));
+                strLine = sr.ReadLine();
+            }
+            sr.Close();
+        }
+
+        /// <summary>
+        /// 显示终局
+        /// </summary>
+        private void DisplayEnd()
+        {
             moves = new List<Move>(board.Moves);
             board.clear();
             drawImage();
@@ -348,6 +392,16 @@ namespace GoViewer
             board.GotoStart();
             drawImage();
             boardPanel.Refresh();
+        }
+
+        /// <summary>
+        /// 结束按钮操作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnEnd_Click(object sender, EventArgs e)
+        {
+            DisplayEnd();
         }
     }
 }

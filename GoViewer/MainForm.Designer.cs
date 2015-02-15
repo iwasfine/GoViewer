@@ -75,26 +75,26 @@
             // itemOpen
             // 
             this.itemOpen.Name = "itemOpen";
-            this.itemOpen.Size = new System.Drawing.Size(152, 22);
+            this.itemOpen.Size = new System.Drawing.Size(124, 22);
             this.itemOpen.Text = "打开棋谱";
             this.itemOpen.Click += new System.EventHandler(this.btnFile_Click);
             // 
             // itemSave
             // 
             this.itemSave.Name = "itemSave";
-            this.itemSave.Size = new System.Drawing.Size(112, 22);
+            this.itemSave.Size = new System.Drawing.Size(124, 22);
             this.itemSave.Text = "保存";
             // 
             // itemSaveAs
             // 
             this.itemSaveAs.Name = "itemSaveAs";
-            this.itemSaveAs.Size = new System.Drawing.Size(112, 22);
+            this.itemSaveAs.Size = new System.Drawing.Size(124, 22);
             this.itemSaveAs.Text = "另存为";
             // 
             // itemQuit
             // 
             this.itemQuit.Name = "itemQuit";
-            this.itemQuit.Size = new System.Drawing.Size(112, 22);
+            this.itemQuit.Size = new System.Drawing.Size(124, 22);
             this.itemQuit.Text = "退出";
             this.itemQuit.Click += new System.EventHandler(this.itemQuit_Click);
             // 
@@ -175,6 +175,7 @@
             this.btnEnd.TabIndex = 3;
             this.btnEnd.Text = "结束";
             this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
             // 
             // btnNext
             // 
