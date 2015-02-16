@@ -26,7 +26,7 @@ namespace GoViewer
             InitializeComponent();
             board = new Board();
             this.boardPanel = new BoardPanel();
-            this.boardPanel.Size = new System.Drawing.Size(this.Width - 145, this.Height - 150);
+            this.boardPanel.Size = new System.Drawing.Size(this.Width - statPanel.Width - 16, this.Height - controlPanel.Height - 64);
             this.boardPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.boardPanel_Paint);
             this.boardPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseClick);
             this.boardPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.boardPanel_MouseMove);
@@ -411,5 +411,24 @@ namespace GoViewer
         {
             DisplayEnd();
         }
+
+        private void btnJudge_Click(object sender, EventArgs e)
+        {
+            board.Judge();
+            Graphics g = Graphics.FromImage(img);
+            for (int i = 0; i < 19; i++)
+            {
+                for (int j = 0; j < 19; j++)
+                {
+                    if (board.Result[i, j] == 1) drawSquare(g, i, j, WHITE);
+                    if (board.Result[i, j] == 2) drawSquare(g, i, j, BLACK);
+                }
+            }
+            boardPanel.Refresh();
+            lblResult.Text = (board.NoOfBlackWin - 6.5 > 0 ? "黑" : "白") + "胜" + Math.Abs((int)(((float)board.NoOfBlackWin) - 6.5)) + ".5目";
+            lblResult.Visible = true;
+        }
+
+        
     }
 }

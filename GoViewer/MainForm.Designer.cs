@@ -46,6 +46,8 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.timerView = new System.Windows.Forms.Timer(this.components);
+            this.btnJudge = new System.Windows.Forms.Button();
+            this.lblResult = new System.Windows.Forms.Label();
             this.menu.SuspendLayout();
             this.statPanel.SuspendLayout();
             this.controlPanel.SuspendLayout();
@@ -101,19 +103,20 @@
             // statPanel
             // 
             this.statPanel.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.statPanel.Controls.Add(this.lblResult);
             this.statPanel.Controls.Add(this.label2);
             this.statPanel.Controls.Add(this.label1);
             this.statPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.statPanel.Location = new System.Drawing.Point(858, 25);
+            this.statPanel.Location = new System.Drawing.Point(819, 25);
             this.statPanel.Name = "statPanel";
-            this.statPanel.Size = new System.Drawing.Size(129, 716);
+            this.statPanel.Size = new System.Drawing.Size(168, 716);
             this.statPanel.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(40, 148);
+            this.label2.Location = new System.Drawing.Point(16, 162);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 26);
             this.label2.TabIndex = 1;
@@ -123,7 +126,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(40, 42);
+            this.label1.Location = new System.Drawing.Point(16, 61);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 26);
             this.label1.TabIndex = 0;
@@ -132,6 +135,7 @@
             // controlPanel
             // 
             this.controlPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.controlPanel.Controls.Add(this.btnJudge);
             this.controlPanel.Controls.Add(this.btnFile);
             this.controlPanel.Controls.Add(this.btnMode);
             this.controlPanel.Controls.Add(this.btnEnd);
@@ -141,13 +145,13 @@
             this.controlPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.controlPanel.Location = new System.Drawing.Point(0, 656);
             this.controlPanel.Name = "controlPanel";
-            this.controlPanel.Size = new System.Drawing.Size(858, 85);
+            this.controlPanel.Size = new System.Drawing.Size(819, 85);
             this.controlPanel.TabIndex = 2;
             // 
             // btnFile
             // 
             this.btnFile.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnFile.Location = new System.Drawing.Point(642, 33);
+            this.btnFile.Location = new System.Drawing.Point(622, 33);
             this.btnFile.Name = "btnFile";
             this.btnFile.Size = new System.Drawing.Size(75, 23);
             this.btnFile.TabIndex = 5;
@@ -158,7 +162,7 @@
             // btnMode
             // 
             this.btnMode.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnMode.Location = new System.Drawing.Point(546, 33);
+            this.btnMode.Location = new System.Drawing.Point(526, 33);
             this.btnMode.Name = "btnMode";
             this.btnMode.Size = new System.Drawing.Size(75, 23);
             this.btnMode.TabIndex = 4;
@@ -169,7 +173,7 @@
             // btnEnd
             // 
             this.btnEnd.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnEnd.Location = new System.Drawing.Point(452, 33);
+            this.btnEnd.Location = new System.Drawing.Point(364, 33);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(75, 23);
             this.btnEnd.TabIndex = 3;
@@ -180,7 +184,7 @@
             // btnNext
             // 
             this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnNext.Location = new System.Drawing.Point(359, 33);
+            this.btnNext.Location = new System.Drawing.Point(283, 33);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(75, 23);
             this.btnNext.TabIndex = 2;
@@ -191,7 +195,7 @@
             // btnPrevious
             // 
             this.btnPrevious.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnPrevious.Location = new System.Drawing.Point(265, 33);
+            this.btnPrevious.Location = new System.Drawing.Point(202, 33);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(75, 23);
             this.btnPrevious.TabIndex = 1;
@@ -202,7 +206,7 @@
             // btnStart
             // 
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnStart.Location = new System.Drawing.Point(173, 33);
+            this.btnStart.Location = new System.Drawing.Point(121, 33);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -214,6 +218,28 @@
             // 
             this.timerView.Interval = 1000;
             this.timerView.Tick += new System.EventHandler(this.timerView_Tick);
+            // 
+            // btnJudge
+            // 
+            this.btnJudge.Location = new System.Drawing.Point(445, 33);
+            this.btnJudge.Name = "btnJudge";
+            this.btnJudge.Size = new System.Drawing.Size(75, 23);
+            this.btnJudge.TabIndex = 6;
+            this.btnJudge.Text = "点目";
+            this.btnJudge.UseVisualStyleBackColor = true;
+            this.btnJudge.Click += new System.EventHandler(this.btnJudge_Click);
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("KaiTi", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblResult.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.lblResult.Location = new System.Drawing.Point(17, 297);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(82, 21);
+            this.lblResult.TabIndex = 2;
+            this.lblResult.Text = "label3";
+            this.lblResult.Visible = false;
             // 
             // MainForm
             // 
@@ -256,6 +282,8 @@
         private System.Windows.Forms.Button btnMode;
         private System.Windows.Forms.Timer timerView;
         private System.Windows.Forms.Button btnFile;
+        private System.Windows.Forms.Button btnJudge;
+        private System.Windows.Forms.Label lblResult;
     }
 }
 

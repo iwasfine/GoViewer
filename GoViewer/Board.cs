@@ -267,6 +267,100 @@ namespace GoViewer
             grid = new bool?[19, 19];
 
         }
+
+        public int[,] Result;
+        public int NoOfBlackWin;
+
+        public void Judge()
+        {
+            Result = new int[19, 19];
+            for (int i = 0; i < 19; i++)
+            {
+                for (int j = 0; j < 19; j++)
+                {
+                    if (Result[i, j] != 0) continue;
+                    if (grid[i, j] != null) continue;
+                    HashSet<Point> tmp = new HashSet<Point>();
+                    bool? isBlack = null;
+                    bool decided = false;
+                    isBlack = dfs(i, j, tmp, ref isBlack,  ref decided);
+                    foreach (var item in tmp)
+                    {
+                        if (isBlack == null) Result[item.X, item.Y] = 3;
+                        else Result[item.X, item.Y] = isBlack == true ? 1 : 2;
+                    }
+                }
+            }
+            int numbersOfBlack = 0;
+            int numbersOfWhite = 0;
+            for (int i = 0; i < 19; i++)
+            {
+                for (int j = 0; j < 19; j++)
+                {
+                    if (grid[i, j] == null)
+                    {
+                        if (Result[i, j] == 1) numbersOfBlack++;
+                        if (Result[i, j] == 2) numbersOfWhite++;
+                    }
+                    else if (grid[i, j] == true) numbersOfBlack++;
+                    else numbersOfWhite++;
+                }
+            }
+            NoOfBlackWin = numbersOfBlack - numbersOfWhite;
+            if (Moves[Moves.Count - 1].black) NoOfBlackWin--;
+        }
+
+        private bool? dfs(int i, int j, HashSet<Point> tmp, ref bool? isBlack, ref bool decided)
+        {
+            tmp.Add(new Point(i, j));
+            if (i > 0 && grid[i - 1, j] != null)
+                if (decided)
+                {
+                    if (isBlack != null) isBlack = isBlack == grid[i - 1, j] ? isBlack : null;
+                }
+                else
+                {
+                    isBlack = grid[i - 1, j];
+                    decided = true;
+                }
+            if (i < 18 && grid[i + 1, j] != null)
+                if (decided)
+                {
+                    if (isBlack != null) isBlack = isBlack == grid[i + 1, j] ? isBlack : null;
+                }
+                else
+                {
+                    isBlack = grid[i + 1, j];
+                    decided = true;
+                }
+            if (j > 0 && grid[i, j - 1] != null)
+                if (decided)
+                {
+                    if (isBlack != null) isBlack = isBlack == grid[i, j - 1] ? isBlack : null;
+                }
+                else
+                {
+                    isBlack = grid[i, j - 1];
+                    decided = true;
+                }
+            if (j < 18 && grid[i, j + 1] != null)
+                if (decided)
+                {
+                    if (isBlack != null) isBlack = isBlack == grid[i, j + 1] ? isBlack : null;
+                }
+                else
+                {
+                    isBlack = grid[i, j + 1];
+                    decided = true;
+                }
+
+            if (i > 0 && grid[i - 1, j] == null && !tmp.Contains(new Point(i - 1, j))) dfs(i - 1, j, tmp, ref isBlack, ref decided);
+            if (i < 18 && grid[i + 1, j] == null && !tmp.Contains(new Point(i + 1, j))) dfs(i + 1, j, tmp, ref isBlack, ref decided);
+            if (j > 0 && grid[i, j - 1] == null && !tmp.Contains(new Point(i, j - 1))) dfs(i, j - 1, tmp, ref isBlack, ref decided);
+            if (j < 18 && grid[i, j + 1] == null && !tmp.Contains(new Point(i, j + 1))) dfs(i, j + 1, tmp, ref isBlack, ref decided);
+
+            return isBlack;
+        }
     }
 
 }
