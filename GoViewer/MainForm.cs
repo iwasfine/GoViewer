@@ -24,6 +24,7 @@ namespace GoViewer
         public MainForm()
         {
             InitializeComponent();
+            countingMode = false;
             board = new Board();
             this.boardPanel = new BoardPanel();
             this.boardPanel.Size = new System.Drawing.Size(this.Width - statPanel.Width - 16, this.Height - controlPanel.Height - 64);
@@ -100,10 +101,12 @@ namespace GoViewer
             width = boardPanel.Width;
             height = boardPanel.Height;
             size = Math.Min(width, height) / 21;
+            img = new Bitmap(width, height);
             drawImage();
             Refresh();
         }
 
+        private bool countingMode;
         /// <summary>
         /// 鼠标点击棋盘响应
         /// </summary>
@@ -111,32 +114,36 @@ namespace GoViewer
         /// <param name="e"></param>
         private void boardPanel_MouseClick(object sender, MouseEventArgs e)
         {
-            setBoard(e.X, e.Y, turn);
-            if (mouseIn)                    //鼠标是否点在棋盘范围
+            getMouse(e.X, e.Y, turn);
+            if (countingMode)
             {
-                //处理打劫
-                if (board.isKo)
+                if (mouseIn)
                 {
-                    DisplayEnd();
-                    mouseIn = false;
-                    board.isKo = false;
-                    return;
+                    board.setGridCount(mouseI, mouseJ);
+                    JudgeAndRefresh();
                 }
-                //更新棋盘
-                drawImage();
-                Refresh();
-                //foreach (Point p in board.needToInvalidate)
-                //{
-                //    int x = width / 2 - 9 * size + p.Y * size;
-                //    int y = height / 2 - 9 * size + p.X * size;
-                //    Rectangle rec = new Rectangle(x, y, size, size);
-                //    boardPanel.Invalidate(rec);
-
-                //}
-                //黑白互换
-                if (board.IsValid)
-                    if (turn == true) turn = false;
-                    else if (turn == false) turn = true;
+            }
+            else
+            {
+                if (mouseIn)                    //鼠标是否点在棋盘范围
+                {
+                    board.setStone(mouseI, mouseJ, turn);
+                    //处理打劫
+                    if (board.isKo)
+                    {
+                        DisplayEnd();
+                        mouseIn = false;
+                        board.isKo = false;
+                        return;
+                    }
+                    //更新棋盘
+                    drawImage();
+                    Refresh();
+                    //黑白互换
+                    if (board.IsValid)
+                        if (turn == true) turn = false;
+                        else if (turn == false) turn = true;
+                }
             }
             mouseIn = false;
         }
@@ -148,7 +155,7 @@ namespace GoViewer
         /// <param name="p1">棋盘面板横坐标</param>
         /// <param name="p2">棋盘面板纵坐标</param>
         /// <param name="turn">黑或白或空</param>
-        private void setBoard(int p1, int p2, bool? turn)
+        private void getMouse(int p1, int p2, bool? turn)
         {
             mouseI = (p2 - (height / 2 - 9 * size)) / size;
             mouseJ = (p1 - (width / 2 - 9 * size)) / size;
@@ -158,7 +165,6 @@ namespace GoViewer
                 return;
             }
             mouseIn = true;
-            board.setStone(mouseI, mouseJ, turn);
         }
 
         /// <summary>
@@ -201,6 +207,7 @@ namespace GoViewer
             height = boardPanel.Height;
             size = Math.Min(width, height) / 21;
             turn = BLACK;
+            img = new Bitmap(width, height);
             drawImage();
         }
 
@@ -209,7 +216,7 @@ namespace GoViewer
         /// </summary>
         private void drawImage()
         {
-            img = new Bitmap(width, height);
+            //img = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(img);
 
             //使绘图质量最高，即消除锯齿
@@ -414,7 +421,28 @@ namespace GoViewer
 
         private void btnJudge_Click(object sender, EventArgs e)
         {
+            if (!countingMode)
+            {
+                countingMode = true;
+                lblResult.Text = "请确认死子";
+                lblResult.Visible = true;
+                btnJudge.Text = "确认死子";
+                board.initGridCount();
+            }
+            else
+            {
+                JudgeAndRefresh();
+                lblResult.Text = (board.NoOfBlackWin - 6.5 > 0 ? "黑" : "白") + "胜" + Math.Abs((int)(((float)board.NoOfBlackWin) - 6.5)) + ".5目";
+                lblResult.Visible = true;
+                btnJudge.Text = "点目";
+                countingMode = false;
+            }
+        }
+
+        private void JudgeAndRefresh()
+        {
             board.Judge();
+            drawImage();
             Graphics g = Graphics.FromImage(img);
             for (int i = 0; i < 19; i++)
             {
@@ -425,10 +453,8 @@ namespace GoViewer
                 }
             }
             boardPanel.Refresh();
-            lblResult.Text = (board.NoOfBlackWin - 6.5 > 0 ? "黑" : "白") + "胜" + Math.Abs((int)(((float)board.NoOfBlackWin) - 6.5)) + ".5目";
-            lblResult.Visible = true;
         }
 
-        
+
     }
 }
