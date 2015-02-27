@@ -65,7 +65,7 @@ namespace GoViewer
             Graphics g = e.Graphics;
             g.DrawImage(img, 0, 0);
             if (board.Count == 0) return;
-            drawSquare(g, board.Moves[board.Count - 1].row, board.Moves[board.Count - 1].col, board.Moves[board.Count - 1].black);
+            drawSign(g, board.Moves[board.Count - 1].row, board.Moves[board.Count - 1].col, board.Moves[board.Count - 1].black);
         }
 
         /// <summary>
@@ -186,6 +186,14 @@ namespace GoViewer
 
         }
 
+        private void drawSign(Graphics g, int i, int j, bool? isBlack)
+        {
+            int x = width / 2 - 9 * size + j * size + size / 2;
+            int y = height / 2 - 9 * size + i * size + size / 2;
+            Point[] p = { new Point(x, y), new Point(x + size / 2, y), new Point(x, y + size / 2) };
+            Brush b = isBlack == true ? Brushes.Yellow : Brushes.Blue;
+            g.FillPolygon(b, p);
+        }
         /// <summary>
         /// 鼠标在棋盘上移动处理
         /// </summary>
